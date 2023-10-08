@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="todo" id="Project-752" database="Sqlite" >
+	<schema name="Default" >
+		<table name="Tbl" />
+		<table name="template" prior="todo" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[AUTOINCREMENT]]></defo>
+			</column>
+			<column name="name" type="VARCHAR" length="50" jt="12" >
+				<comment><![CDATA[name of a template]]></comment>
+			</column>
+			<column name="last_updated" type="DATETIME" jt="93" mandatory="y" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<column name="created" type="DATETIME" jt="93" mandatory="y" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_template" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="template_listings" prior="template_listing" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[AUTOINCREMENT]]></defo>
+			</column>
+			<column name="name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="template" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_template_listings" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_template_listings_template" to_schema="Default" to_table="template" delete_action="cascade" >
+				<fk_column name="template" pk="id" />
+			</fk>
+		</table>
+		<table name="todo" prior="Tbl" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[AUTOINCREMENT]]></defo>
+			</column>
+			<column name="name" type="VARCHAR" length="50" jt="12" mandatory="y" />
+			<column name="last_updated" type="DATETIME" jt="93" mandatory="y" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<column name="created" type="DATETIME" jt="93" mandatory="y" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<column name="status" type="BINARY" length="1" jt="-2" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+			</column>
+			<index name="pk_todo" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="todo_listings" prior="Tbl_0" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<defo><![CDATA[AUTOINCREMENT]]></defo>
+			</column>
+			<column name="name" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="status" type="BINARY" length="1" jt="-2" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+			</column>
+			<column name="todo" type="INTEGER" jt="4" mandatory="y" />
+			<fk name="fk_todo_listings_todo" to_schema="Default" to_table="todo" delete_action="cascade" >
+				<fk_column name="todo" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-1784" show_relation="columns" >
+		<entity schema="Default" name="template" color="C1D8EE" x="224" y="144" />
+		<entity schema="Default" name="template_listings" color="C1D8EE" x="224" y="400" />
+		<entity schema="Default" name="todo" color="C1D8EE" x="448" y="144" />
+		<entity schema="Default" name="todo_listings" color="C1D8EE" x="464" y="384" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Right-click the layout to create new tables. 
+- Double-click table headers to edit. 
+- For a better understanding of the schema, create multiple layouts.
+- Save the design to the model file, and deploy from 'Schema / Create into the database'.]]></comment>
+		</callout>
+	</layout>
+</project>

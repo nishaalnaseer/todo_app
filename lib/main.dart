@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/template_view.dart';
-import 'models.dart';
-
 
 void main() {
   runApp(
@@ -26,7 +24,7 @@ class NishawlsToDo extends StatelessWidget {
 
 
 class App extends StatefulWidget {
-  App({super.key});
+  const App({super.key});
 
   @override
   State<App> createState() => _AppState();
@@ -37,7 +35,6 @@ class _AppState extends State<App> {
   Widget templateView = const TemplateView();
   // Widget todoView =
   late Widget window = templateView;
-
 
   @override
   void initState() {
